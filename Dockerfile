@@ -1,7 +1,6 @@
 FROM nginx:alpine
 
-RUN sed -i 's/listen\s*80;/listen 8188;/g' /etc/nginx/conf.d/default.conf
-
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY . /usr/share/nginx/html
 
 EXPOSE 8188
