@@ -72,17 +72,29 @@
         const subtitleElement =
             document.getElementById("sbtp-subtitle");
 
-        function updateSubtitle() {
-            const randomIndex = Math.floor(
-                Math.random() * sbtpMeanings.length
-            );
+        let shuffled = [];
+        let index = 0;
 
-            subtitleElement.textContent =
-                sbtpMeanings[randomIndex];
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
         }
 
-        updateSubtitle();
-        setInterval(updateSubtitle, 2000);
+        function nextMeaning() {
+            if (index >= shuffled.length) {
+                shuffled = shuffle(sbtpMeanings);
+                index = 0;
+            }
+            subtitleElement.textContent = shuffled[index];
+            index++;
+        }
+
+        nextMeaning();
+        setInterval(nextMeaning, 2000);
     </script>
 </body>
 </html>
